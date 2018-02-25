@@ -76,3 +76,18 @@ public class ImageUploader : MonoBehaviour {
 		StartCoroutine(UploadFileCo(localFileName, uploadURL));
 	}
 }
+
+
+/*
+ * 
+
+curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/file'
+  -X 'POST'
+  -H 'Authorization: Bearer eyjhbGCIOIjIuzI1NiISimtpZCI6...'
+  -F "photosceneid=hcYJcrnHUsNSPII9glhVe8lRF6lFXs4NHzGqJ3zdWMU"
+  -F "type=image"
+  -F "file[0]=@c:/sample_data/_MG_9026.jpg"
+  -F "file[1]=@c:/sample_data/_MG_9027.jpg"
+
+
+*/
