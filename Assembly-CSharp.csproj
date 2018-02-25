@@ -52,31 +52,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\forgeAPI.cs" />
-     <Compile Include="Assets\HttpClient\Dispatcher\Dispatcher.cs" />
-     <Compile Include="Assets\HttpClient\Dispatcher\IDispatcher.cs" />
-     <Compile Include="Assets\HttpClient\Enums\ContentReadAction.cs" />
-     <Compile Include="Assets\HttpClient\Enums\HttpAction.cs" />
-     <Compile Include="Assets\HttpClient\Enums\HttpCompletionOption.cs" />
-     <Compile Include="Assets\HttpClient\Example\ExampleSceneManagerController.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpBase.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpDelete.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpGet.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpPatch.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpPost.cs" />
-     <Compile Include="Assets\HttpClient\HttpActions\HttpPut.cs" />
-     <Compile Include="Assets\HttpClient\HttpClient.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\ByteArrayContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\FormUrlEncodedContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\IHttpContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\MultiPartContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\MultipartFormDataContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\StreamContent.cs" />
-     <Compile Include="Assets\HttpClient\HttpContent\StringContent.cs" />
-     <Compile Include="Assets\HttpClient\Messages\HttpResponseMessage.cs" />
-     <Compile Include="Assets\HttpClient\Messages\UploadStatusMessage.cs" />
      <Compile Include="Assets\ImageUploader.cs" />
      <Compile Include="Assets\postImage.cs" />
-     <None Include="Assets\HttpClient\readme.txt" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>/opt/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>
