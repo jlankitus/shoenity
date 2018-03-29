@@ -53,7 +53,9 @@
   <ItemGroup>
      <Compile Include="Assets\forgeAPI.cs" />
      <Compile Include="Assets\ImageUploader.cs" />
+     <Compile Include="Assets\OBJImport\FastObjImport.cs" />
      <Compile Include="Assets\postImage.cs" />
+     <Compile Include="Assets\testJSON.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>/opt/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>
