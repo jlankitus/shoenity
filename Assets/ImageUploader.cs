@@ -5,7 +5,7 @@ using System.IO;
 
 public class ImageUploader : MonoBehaviour {
 
-	WebCamTexture webCamTexture;
+	public WebCamTexture webCamTexture;
 	int count = 0;
 
 	void Start() 

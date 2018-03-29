@@ -38,6 +38,7 @@ public class RootObj
 public class forgeAPI : MonoBehaviour {
 
 	public Text sceneText;
+	public Text debug;
 	private string sceneName;
 	public string format;
 
@@ -77,8 +78,9 @@ public class forgeAPI : MonoBehaviour {
             Debug.Log(www.error);
         }
         else {
-            Debug.Log("Token complete!");
+            print("Token complete!");
 			print(www.downloadHandler.text);
+			debug.text = www.downloadHandler.text;
 
 			string json = www.downloadHandler.text;
 
@@ -86,6 +88,7 @@ public class forgeAPI : MonoBehaviour {
 			access_token = accessToken.CreateFromJSON(json).access_token;
 			StartCoroutine(newPhotoScene());
 			// StartCoroutine(Download());
+			// ImportObject
         } 
 	}
 
@@ -109,7 +112,7 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 
         form.AddField("scenename", sceneName);
 		form.AddField("format", format);
-		form.AddField("metadata_name[0]", "obj");
+		form.AddField("metadata_name[0]", "orthogsd");
 		form.AddField("metadata_value[0]", "0.1");
 		form.AddField("metadata_name[1]", "targetcs");
 		form.AddField("metadata_value[1]", "UTM84-32N");
@@ -124,6 +127,7 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
         }
         else {
             Debug.Log("Photoscene complete!");
+			debug.text = "Photoscene complete!";
 			// photoSceneId = SceneID.CreateFromJSON(www.downloadHandler.text).photosceneid;
 			// print(photoSceneId);
 			photoSceneId = parsePhotoSceneID(www.downloadHandler.text);
@@ -159,7 +163,7 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
         form.AddField("photosceneid", photoSceneId);
 		form.AddField("type", "image");
 		// string urlEncoded = WWW.EscapeURL("@/home/jed/Pictures/brandonShoe/1.jpg");
-		string [] fileEntries = Directory.GetFiles("Assets/StreamingAssets/peanuts/");
+		string [] fileEntries = Directory.GetFiles("Assets/StreamingAssets/peanuts");
 		int count = 1;
 		foreach(string file in fileEntries)
 		{
@@ -177,6 +181,7 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 				}
 				else {
 					Debug.Log("photo upload complete!");
+					debug.text = www.downloadHandler.text;
 					print(www.downloadHandler.text);
 				} 
 				count++;
@@ -211,6 +216,7 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 		string statusJSON = www.downloadHandler.text;
 		print (www.downloadHandler.text);
 		print("PROCESSING");
+		debug.text = www.downloadHandler.text;
 		
 		StartCoroutine(GetStatus());
 	}
@@ -240,12 +246,14 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 			if(last == "100")
 			{
 				StartCoroutine(Download());
+				status = true;
 			}
 			else
 			{
 				print (www.text);
-				print (www.responseHeaders);
-				yield return new WaitForSeconds(3f);
+				debug.text = www.text;
+				// print (www.responseHeaders);
+				yield return new WaitForSeconds(6f);
 			}
 			
 		}
@@ -284,13 +292,13 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 
 	IEnumerator Download()
 	{
+		print("downloadin...");
 		var form = new WWWForm();
 		var headers = new Hashtable();
 		headers.Add ("Content-Type", "application/json");
 		headers.Add("Authorization", "Bearer " + access_token);
 
-		string photoSceneId = "P0PpN1lNqjbTfwAMCAX1wOJfYobDmfXCwy9xDqPeT6A";
-		string url = "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/" + photoSceneId;
+		string url = "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/" + photoSceneId + "?format=obj";
 		WWW www = new WWW(url, null, headers);
 
 		// Post a request to an URL with our custom headers
@@ -318,7 +326,9 @@ iJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJ5WjgxMllmaTZ3R
 		string result = (last1 + ':' + last2);
 		print(result);
 		string downloadURL = Regex.Unescape(result);
-		print(downloadURL);
+		debug.text = downloadURL;
+
+		StartCoroutine(ImportObject(downloadURL));
 
 		/*
 		using (WWW download = new WWW(downloadURL))
