@@ -41,10 +41,11 @@ public class ObjImporter : MonoBehaviour
 
     public void Start()
     {
-        Import("C:\\Users\\Branden\\Documents\\Point Cloud Surface Reconstruction\\Assets\\Unity-PointCloud\\Texture Stuff\\Test Data\\shoe\\shoe.obj");
+        Import("C:\\Users\\Branden\\Documents\\Point Cloud Surface Reconstruction\\Assets\\Unity-PointCloud\\Texture Stuff\\Test Data\\shoe\\shoe.obj",
+               "C:\\Users\\Branden\\Documents\\Point Cloud Surface Reconstruction\\Assets\\Unity-PointCloud\\Texture Stuff\\Test Data\\shoe\\shoe_texture.jpg");
     }
 
-    public void Import(string mPath)
+    public void Import(string mPath, string textPath)
     {
         modelPath = mPath;
         // Create mesh
@@ -62,7 +63,9 @@ public class ObjImporter : MonoBehaviour
         // Add mesh renderer
         MeshRenderer meshRenderer = emptyGameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         meshRenderer.material = mat;
-
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(File.ReadAllBytes(textPath));
+        meshRenderer.material.SetTexture("_MainTex", tex);
         // Tell the boys
         if (ObjectImported != null)
         {
